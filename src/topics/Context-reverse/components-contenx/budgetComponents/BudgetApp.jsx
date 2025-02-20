@@ -7,7 +7,7 @@ import ExpensisCard from './ExpensisCard'
 import ProductForm from './ProductForm'
 
 const BudgetApp = () => {
-    const { state, dispatch } = useStore();
+    const { state } = useStore();
     return (
         <div className='w-full flex flex-col justify-around   items-center'>
             <div>
