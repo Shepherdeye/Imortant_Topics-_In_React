@@ -6,11 +6,14 @@ const ProductForm = () => {
 
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
-    const { dispatch } = useStore();
+    const { dispatch, remaining } = useStore();
 
     const handleAddProduct = () => {
         if (!name || !price) return alert("Please fill in both fields!");
-
+        if (price > remaining()) {
+            alert("you dont have enough money");
+            return false;
+        }
         const newProduct = {
             id: uuidv4(),
             exName: name,

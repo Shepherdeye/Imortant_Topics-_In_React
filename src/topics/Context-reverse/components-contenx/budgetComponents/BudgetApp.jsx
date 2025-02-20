@@ -19,17 +19,16 @@ const BudgetApp = () => {
                 <RemainingFromBudget />
             </div>
 
-
             {/* form */}
             <div>
                 <ProductForm />
             </div>
 
             {/* cards */}
-            <div className='flex justify-around items-center gap-5 flex-wrap w-full'>
-                {state.expensis.map(({ id, cost, exName }) => {
+            <div className='flex justify-around items-center gap-5 flex-wrap w-8/12'>
+                {state.expensis.length > 0 ? state.expensis.map(({ id, cost, exName }) => {
                     return <ExpensisCard key={id} id={id} cost={cost} name={exName} />
-                })}
+                }) : <h1 className='bg-red-300 font-bold p-2 rounded'> there is no data</h1>}
             </div>
         </div>
     )

@@ -4,10 +4,8 @@ export const initialStatus = {
     cakesNumber: 10,
     icecreamNumber: 20,
     budget: 6000,
-    expensis: [{ id: 1, exName: "house", cost: 200 }, { id: 2, exName: "supermarket", cost: 300 }, { id: 3, exName: "gym", cost: 500 }, { id: 4, exName: "transportation", cost: 1000 }]
+    expensis: localStorage.getItem("mybudget") ? JSON.parse(localStorage.getItem("mybudget")) : []
 }
-
-
 
 
 // this the reducer
