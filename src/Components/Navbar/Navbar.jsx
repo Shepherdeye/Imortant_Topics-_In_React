@@ -13,13 +13,13 @@ const Navbar = () => {
             <div className="w-2/4 md:w-1/4 text-lg md:text-3xl">
                 <Link to="/">React Reverse</Link>
             </div>
-            <ul className="w-2/4 md:w-1/4 flex justify-around items-center text-sm md:text-xl">
+            <ul className="w-2/4 md:w-2/5 lg:w-  flex justify-around items-center text-sm md:text-xl">
                 <Link className="text-yellow-700 hover:text-yellow-300" to="/">Home</Link>
 
                 {/* Corrected Select Dropdown */}
                 <select
                     onChange={handleSelectChange}
-                    className="bg-gray-800 text-yellow-300 border-none p-1 rounded"
+                    className="text-yellow-700  hover:text-yellow-300 border-none p-1 rounded bg-gray-900 outline-none"
                 >
                     <option value="/context">Context Store</option>
                     <option value="/budget">Context Budget</option>
