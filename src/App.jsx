@@ -5,6 +5,7 @@ import HomePage from './Components/Home/HomePage'
 import ContextHome from './topics/Context-reverse/components-contenx/Home-context-page/Context-home'
 import ContextProvider from './topics/Context-reverse/context/contextData'
 import BudgetApp from './topics/Context-reverse/components-contenx/budgetComponents/BudgetApp'
+import HomePageHoc from './topics/HOC/HocHome/HomePageHoc'
 const App = () => {
   return (
     <ContextProvider>
@@ -14,6 +15,7 @@ const App = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/budget' element={<BudgetApp />} />
           <Route path='/context' element={<ContextHome />} />
+          <Route path='/hoc' element={<HomePageHoc />} />
           <Route path='*' element={
             <h2 className='font-bold text-3xl text-bg-danger p-4 text-center text-white mt-50'>
               Error 404 Not Found

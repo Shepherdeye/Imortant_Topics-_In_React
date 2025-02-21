@@ -25,7 +25,7 @@ const Navbar = () => {
                     <option value="/budget">Context Budget</option>
                 </select>
 
-                <Link className="text-yellow-700 hover:text-yellow-300" to="/">HOC</Link>
+                <Link className="text-yellow-700 hover:text-yellow-300" to="/hoc">HOC</Link>
             </ul>
         </nav>
     );
