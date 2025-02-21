@@ -1,4 +1,4 @@
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, useEffect } from "react";
 import reducer from "./Reducer";
 import { initialStatus } from "./Reducer";
 
@@ -18,7 +18,10 @@ function ContextProvider({ children }) {
         return state.budget - consumption();
     };
 
-
+    // set localstorage
+    useEffect(() => {
+        localStorage.setItem("mybudget", JSON.stringify(state.expensis));
+    }, [state])
 
     return (
         <StoreContext.Provider value={{ state, dispatch, consumption, remaining }}>
