@@ -1,14 +1,5 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
-<<<<<<< HEAD
-export default class ShareComponent extends Component {
-    render() {
-        return (
-            <div>ShareComponent</div>
-        )
-    }
-}
-=======
 const Counter = (WrappedComponent) => {
     return (
         class Counter extends Component {
@@ -37,4 +28,3 @@ const Counter = (WrappedComponent) => {
 }
 
 export default Counter
->>>>>>> test
