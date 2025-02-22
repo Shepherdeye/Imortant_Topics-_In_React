@@ -1,5 +1,4 @@
 import * as actions from "./Actions";
-
 export const initialStatus = {
     cakesNumber: 10,
     icecreamNumber: 20,
