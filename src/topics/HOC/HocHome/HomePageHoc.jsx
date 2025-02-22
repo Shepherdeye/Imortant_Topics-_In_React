@@ -8,7 +8,6 @@ const HomePageHoc = () => {
             <h3 className='bg-gray-900 text-white p-3 my-3 rounded font-semibold'>For Learning the HOC Logic</h3>
             <ClickCounter />
             <HoverCounter />
-
         </div>
     )
 }
