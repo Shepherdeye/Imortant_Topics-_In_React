@@ -19,6 +19,7 @@ const Counter = (WrappedComponent) => {
 
             render() {
                 return <WrappedComponent
+                    name="sayed"
                     count={this.state.count}
                     incrementcount={this.incrementcount} />
             }
