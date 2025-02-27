@@ -26,6 +26,7 @@ const Navbar = () => {
                 </select>
 
                 <Link className="text-yellow-700 hover:text-yellow-300" to="/hoc">HOC</Link>
+                <Link className="text-yellow-700 hover:text-yellow-300" to="/states">States</Link>
             </ul>
         </nav>
     );
