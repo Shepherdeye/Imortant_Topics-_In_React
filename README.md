@@ -8,5 +8,4 @@ Currently, two official plugins are available:
 Currently, two official plugins are available:
 
 
-Currently, two official plugins are available:
 
