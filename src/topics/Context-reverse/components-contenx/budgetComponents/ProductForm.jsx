@@ -31,7 +31,7 @@ const ProductForm = () => {
             {/* Form */}
             < div className="bg-white p-6 shadow-lg rounded-2xl w-80 border border-gray-200 my-5" >
                 <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
-                    Add Product
+                    Add Expensis
                 </h2>
                 <input
                     type="text"
