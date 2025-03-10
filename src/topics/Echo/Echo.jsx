@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import RecordRTC from 'recordrtc';
-import { sendToKatib, SendToNatiq } from '../../utils/ApiCalls';
+import { sendToKatib } from '../../utils/ApiCalls';
 
 const Echo = () => {
     const [recording, setRecording] = useState(false);
@@ -113,12 +113,16 @@ const Echo = () => {
         setLoadingText(true);
 
         try {
-            await sendToKatib(audioBlob);
+            const text = await sendToKatib(audioBlob);
+            if (!text) throw new Error("No Text");
+            setTranscripedText(String(text));
 
+
+            // setTranscripedText(text);
         } catch (error) {
             console.log('>>>>>>>>>>>', error)
-            setLoadingText(false);
         }
+        setLoadingText(false);
     }
 
 
@@ -184,7 +188,7 @@ const Echo = () => {
                 audioUrl && <div className='flex w-full justify-center items-center'>
                     <button
                         disabled={loadingText}
-                        onClick={handleTheTextGeneration}
+                        onClick={() => handleTheTextGeneration(blob)}
                         className='bg-green-700 text-white font-bold p-3 rounded-sm cursor-pointer' >
                         {loadingText ? 'Loading...' : "GenerateText"}
                     </button>
@@ -195,15 +199,17 @@ const Echo = () => {
             {/*this is the Result Dev*/}
 
             {
-                transcripedText && <div div className='flex flex-col items-center w-8/12 m-auto p-5 justify-center my-8 bg-gray-100 rounded-xl' >
+                transcripedText.length > 0 && <div className='flex flex-col items-center w-8/12 m-auto p-5 justify-center my-8 bg-gray-100 rounded-xl' >
 
                     <div className='bg-gray-600 p-5  text-xl font-bold rounded-lg capitalize'>
-                        this is the test generated Text
+                        {transcripedText}
                     </div>
 
                     <button className='bg-blue-900 text-white font-bold rounded-sm p-3 my-3 cursor-pointer'>
                         Generate Audio
                     </button>
+
+
                     {
                         generatedAudioUrl && <div>
                             <audio controls src={generatedAudioUrl}></audio>
@@ -211,6 +217,7 @@ const Echo = () => {
                     }
                 </div >
             }
+
 
         </div >
     )

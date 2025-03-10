@@ -15,10 +15,13 @@ export const sendToKatib = async (audioFile) => {
             { headers: { "Content-Type": "multipart/form-data" } }
         );
         const words = respose.data?.json?.words || [];
-        console.log('this is the words ->', words)
-        return words
+        const text = words.map(word => word.text).join(" ");
+        console.log(text);
+
+        return text
+
     } catch (error) {
-        console.log('>>>>>>>>>>>', error)
+        console.log('failed to fetch words =>>', error)
     }
 
 
