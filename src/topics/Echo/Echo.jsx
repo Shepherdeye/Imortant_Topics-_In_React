@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import RecordRTC from 'recordrtc';
-import { sendToKatib } from '../../utils/ApiCalls';
+import { sendToKatib, sendToNatiq } from '../../utils/ApiCalls';
 
 const Echo = () => {
     const [recording, setRecording] = useState(false);
@@ -16,7 +16,8 @@ const Echo = () => {
     const intervalTimerRef = useRef(null);
     const [loadingText, setLoadingText] = useState(false);
     const [loadingAudio, setLoadingAudio] = useState(false);
-
+    const [wordsTimings, setWordsTimings] = useState([]);
+    const [highlitedIndex, setHighlightedIndex] = useState(null)
 
 
 
@@ -124,11 +125,44 @@ const Echo = () => {
         }
         setLoadingText(false);
     }
+    const handleTheGeneratedAudio = async (text) => {
+        if (!text) {
+            throw new Error("cant get the Text");
+        }
+
+        setLoadingAudio(true);
+
+        try {
+            const { url, wordTimings } = await sendToNatiq(text);
+            setWordsTimings(wordTimings);
+            setGeneratedAudioUrl(url);
+
+        } catch (error) {
+            console.log(error);
+        }
+
+        setLoadingAudio(false);
+    };
 
 
+    // highlited text
 
+    useEffect(() => {
 
+        if (!audioGeneratedAudioRef?.current || !wordsTimings.length) {
+            return;
+        }
+        const handleHighlight = () => {
+            const currentTime = audioGeneratedAudioRef.current.currentTime * 1000;
+            const index = wordsTimings.findIndex(({ start, end }) => start <= currentTime && end >= currentTime);
+            setHighlightedIndex(index < 0 ? null : index);
+        };
+        const targetAudio = audioGeneratedAudioRef.current;
+        targetAudio.addEventListener("timeupdate", handleHighlight);
 
+        return () => targetAudio.removeEventListener("timeupdate", handleHighlight);
+
+    }, [wordsTimings, audioGeneratedAudioRef])
 
     return (
         <div className='m-auto text-white my-10 p-5'>
@@ -141,8 +175,6 @@ const Echo = () => {
 
                     {!recording ? <button onClick={startRecord} className='bg-red-800 p-3 text-xl w-max rounded-sm  cursor-pointer hover:bg-gray-800'>Start Record</button> : <> <div>
                         <button onClick={stopRecord} className='bg-black p-3 text-xl w-max rounded-sm  cursor-pointer hover:bg-gray-800'>Stop Record</button>
-
-
                     </div>
                         <div>
 
@@ -199,20 +231,28 @@ const Echo = () => {
             {/*this is the Result Dev*/}
 
             {
-                transcripedText.length > 0 && <div className='flex flex-col items-center w-8/12 m-auto p-5 justify-center my-8 bg-gray-100 rounded-xl' >
+                transcripedText.length > 0 && <div className='flex flex-col items-center w-8/12 m-auto p-5 justify-center my-8  rounded-xl' >
 
                     <div className='bg-gray-600 p-5  text-xl font-bold rounded-lg capitalize'>
-                        {transcripedText}
+                        {transcripedText.split(" ").map((word, index) => {
+                            return <span key={index}
+                                className={highlitedIndex == index ? "bg-yellow-300 p-1 text-black rounded-sm" : ""}
+                            >
+                                {`${word} `}
+                            </span>
+                        })}
                     </div>
 
-                    <button className='bg-blue-900 text-white font-bold rounded-sm p-3 my-3 cursor-pointer'>
-                        Generate Audio
+                    <button
+                        onClick={() => handleTheGeneratedAudio(transcripedText)}
+                        disabled={loadingAudio}
+                        className='bg-blue-900 text-white font-bold rounded-sm p-3 my-3 cursor-pointer'>
+                        {loadingAudio ? "Loading..." : "Generate Audio"}
                     </button>
-
 
                     {
                         generatedAudioUrl && <div>
-                            <audio controls src={generatedAudioUrl}></audio>
+                            <audio ref={audioGeneratedAudioRef} controls src={generatedAudioUrl}></audio>
                         </div>
                     }
                 </div >

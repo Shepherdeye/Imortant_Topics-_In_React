@@ -8,6 +8,7 @@ import BudgetApp from './topics/Context-reverse/components-contenx/budgetCompone
 import HomePageHoc from './topics/HOC/HocHome/HomePageHoc'
 import StatesHomePage from './topics/StatesOfReact/StatesHomePage'
 import Echo from './topics/Echo/Echo'
+import MainForCustomHook from './topics/CustomHook/MainForCustomHook'
 const App = () => {
   return (
     <ContextProvider>
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='/hoc' element={<HomePageHoc />} />
           <Route path='/states' element={<StatesHomePage />} />
           <Route path='/echo' element={<Echo />} />
+          <Route path='/custom' element={<MainForCustomHook />} />
           <Route path='*' element={
             <h2 className='font-bold text-3xl text-bg-danger p-4 text-center text-white mt-50'>
               Error 404 Not Found
