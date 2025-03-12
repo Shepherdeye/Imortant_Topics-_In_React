@@ -26,6 +26,8 @@ export const sendToKatib = async (audioFile) => {
 
 }
 
+
+
 export const sendToNatiq = async (text) => {
 
     if (!text.trim()) {
@@ -52,20 +54,16 @@ export const sendToNatiq = async (text) => {
         // in this  by  using Unit8Arry we trnsfer  int  array of number  to  store  the  data as number
         const blob = new Blob([Uint8Array.from(normalText, c => c.charCodeAt(0))], { type: "audio/wav" });
         const url = URL.createObjectURL(blob);
-        const wordTimings = durations.map(([word, start, end]) => {
+        const wordTimings = durations.map(([text, start, end]) => {
             return {
                 text: text,
                 start: start * 1000,
                 end: end * 1000
             }
         })
-
         return { url, wordTimings }
-
     } catch (error) {
-
         console.log(Error);
-
     }
 
 }
