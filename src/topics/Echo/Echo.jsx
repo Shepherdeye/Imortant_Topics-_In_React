@@ -175,8 +175,6 @@ const Echo = () => {
 
                     {!recording ? <button onClick={startRecord} className='bg-red-800 p-3 text-xl w-max rounded-sm  cursor-pointer hover:bg-gray-800'>Start Record</button> : <> <div>
                         <button onClick={stopRecord} className='bg-black p-3 text-xl w-max rounded-sm  cursor-pointer hover:bg-gray-800'>Stop Record</button>
-
-
                     </div>
                         <div>
 
