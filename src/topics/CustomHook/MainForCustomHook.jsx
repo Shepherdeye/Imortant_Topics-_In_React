@@ -1,8 +1,13 @@
 import React from 'react'
+import PageOne from './firstway/PageOne'
+import SecondPage from './firstway/SecondPage'
 
 const MainForCustomHook = () => {
     return (
-        <div>MainForCustomHook</div>
+        <div>
+            <PageOne />
+            <SecondPage />
+        </div>
     )
 }
 

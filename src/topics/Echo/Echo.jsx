@@ -38,6 +38,7 @@ const Echo = () => {
             recorderType: RecordRTC.StereoAudioRecorder,
             numberOfAudioChannels: 1
         });
+
         recorder.startRecording();
         recorderRef.current = recorder;
         setRecording(true);
