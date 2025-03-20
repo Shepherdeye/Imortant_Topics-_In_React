@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const navigate = useNavigate(); // Hook for programmatic navigation
-
     const handleSelectChange = (event) => {
         navigate(event.target.value); // Navigate to selected route
     };
@@ -19,16 +18,17 @@ const Navbar = () => {
                 {/* Corrected Select Dropdown */}
                 <select
                     onChange={handleSelectChange}
-                    className="text-yellow-700  hover:text-yellow-300 border-none p-1 rounded bg-gray-900 outline-none"
+                    className="text-yellow-700 w-max hover:text-yellow-300 border-none p-1 rounded bg-gray-900 outline-none"
                 >
                     <option value="/context">Context Store</option>
                     <option value="/budget">Context Budget</option>
+                    <option value="/hoc">HOC</option>
+                    <option value="/states">States</option>
+                    <option value="/echo">Echo</option>
+                    <option value="/custom">Custom Hooks</option>
+                    <option value="/apicall">Api Calls</option>
                 </select>
 
-                <Link className="text-yellow-700 hover:text-yellow-300" to="/hoc">HOC</Link>
-                <Link className="text-yellow-700 hover:text-yellow-300" to="/states">States</Link>
-                <Link className="text-yellow-700 hover:text-yellow-300" to="/echo">Echo</Link>
-                <Link className="text-yellow-700 hover:text-yellow-300" to="/custom">Custom</Link>
             </ul>
         </nav>
     );
